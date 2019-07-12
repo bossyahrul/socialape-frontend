@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
+import PostScream from "./PostScream";
 
 import MyButton from "../util/MyButton";
 
@@ -11,7 +12,6 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
 import NotificationIcon from "@material-ui/icons/Notifications";
 
@@ -23,16 +23,14 @@ class Navbar extends Component {
         <Toolbar className="nav-container">
           {authenticated ? (
             <Fragment>
-              <MyButton tip="Post a scream!">
-                <AddIcon color="primary" />
-              </MyButton>
-              <Link>
+              <PostScream />
+              <Link to="/">
                 <MyButton tip="Home">
-                  <HomeIcon color="primary" />
+                  <HomeIcon />
                 </MyButton>
               </Link>
               <MyButton tip="Notifications">
-                <NotificationIcon color="primary" />
+                <NotificationIcon />
               </MyButton>
             </Fragment>
           ) : (
@@ -40,7 +38,7 @@ class Navbar extends Component {
               <Button color="inherit" component={Link} to="/login">
                 Login
               </Button>
-              <Button color="inherit" component={Link} to="">
+              <Button color="inherit" component={Link} to="/">
                 Home
               </Button>
               <Button color="inherit" component={Link} to="/signup">
@@ -59,7 +57,7 @@ const mapStateToProps = state => ({
 });
 
 Navbar.propTypes = {
-  authentiacated: PropTypes.bool.isRequired
+  authenticated: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps)(Navbar);
