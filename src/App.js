@@ -24,6 +24,9 @@ import user from "./pages/user";
 
 import themeFile from "./util/theme";
 
+axios.defaults.baseURL =
+  "https://asia-east2-socialape-2c205.cloudfunctions.net/api";
+
 const theme = createMuiTheme(themeFile);
 
 const token = localStorage.getItem("FBIdToken");
