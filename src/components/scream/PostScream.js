@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyButton from "../util/MyButton";
+import MyButton from "../../util/MyButton";
 
 // MUI stuff
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -16,7 +15,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 // Redux
 import { connect } from "react-redux";
-import { postScream } from "../redux/actions/dataAction";
+import { postScream, clearErrors } from "../../redux/actions/dataAction";
 import { TextField, Button } from "@material-ui/core";
 
 const styles = theme => ({
@@ -70,15 +69,16 @@ const styles = theme => ({
   },
   submitButton: {
     position: "relative",
-    marginTop: "8px"
+    marginTop: 10,
+    float: "right"
   },
   progressSpinner: {
     position: "absolute"
   },
   closeButton: {
     position: "absolute",
-    left: "90%",
-    top: "10%"
+    left: "91%",
+    top: "6%"
   }
 });
 
@@ -95,14 +95,14 @@ class PostScream extends Component {
       });
     }
     if (!nextProps.UI.errors && !nextProps.UI.loading) {
-      this.setState({ body: "" });
-      this.handleClose();
+      this.setState({ body: "", open: false, errors: {} });
     }
   }
   handleOpen = () => {
     this.setState({ open: true });
   };
   handleClose = () => {
+    this.props.clearErrors();
     this.setState({ open: false, errors: {} });
   };
   handleChange = event => {
@@ -179,7 +179,8 @@ class PostScream extends Component {
 
 PostScream.propTypes = {
   postScream: PropTypes.func.isRequired,
-  UI: PropTypes.object.isRequired
+  UI: PropTypes.object.isRequired,
+  clearErrors: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -188,5 +189,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { postScream }
+  { postScream, clearErrors }
 )(withStyles(styles)(PostScream));

@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import PostScream from "./PostScream";
+import PostScream from "../scream/PostScream";
 
-import MyButton from "../util/MyButton";
+import MyButton from "../../util/MyButton";
 
 // Material UI
 import AppBar from "@material-ui/core/AppBar";
